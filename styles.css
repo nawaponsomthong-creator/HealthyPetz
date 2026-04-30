@@ -11,9 +11,24 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #fff;
   color: #111;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .top-menu {
@@ -33,7 +48,13 @@ body {
   color: #0a1630;
   text-decoration: none;
   font-size: 25px;
+  transition: color 0.2s ease;
 }
+
+.menu-left a:hover {
+  color: var(--blue);
+}
+
 .brand {
   font-weight: 800;
   color: var(--blue);
@@ -55,6 +76,8 @@ body {
 .hero {
   min-height: 720px;
   background: linear-gradient(90deg, #c6e5d5 0%, #cad5eb 100%);
+  background-size: cover;
+  background-position: center 0;
   position: relative;
   overflow: hidden;
   padding: 180px 120px 130px;
@@ -100,6 +123,17 @@ body {
   font-size: 40px;
   font-weight: 700;
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.shop-btn:hover {
+  background-color: #2f9bdb;
+  transform: translateX(-50%) translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 26px rgba(18, 86, 129, 0.35);
+}
+
+.shop-btn:active {
+  transform: translateX(-50%) translateY(-1px) scale(0.99);
 }
 
 .reviews {
@@ -122,6 +156,12 @@ body {
   border: 1px solid #d5d5d5;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   padding: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
 }
 .review-card h3 {
   font-size: 34px;
@@ -175,6 +215,10 @@ body {
   border-left: none;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.signup button:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 .quick-links h3 {
   font-size: 56px;
