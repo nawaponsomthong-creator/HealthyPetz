@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Petz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-menu reveal">
+      <nav class="menu-left">
+        <a href="#">Premium Collagen</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Support</a>
+        <a href="#">Manage Subscription</a>
+      </nav>
+      <div class="brand">HEALTHY <span>Petz</span></div>
+      <div class="menu-right">🛍️</div>
+    </header>
+
+    <section class="hero parallax">
+      <div class="hero-content reveal">
+        <h1>SPRING SALE</h1>
+        <p>Up to 70% off</p>
+      </div>
+      <button class="shop-btn">Shop Now</button>
+    </section>
+
+    <section class="reviews reveal" id="reviews">
+      <h2>The reviews speak for themselves....</h2>
+      <div class="cards" id="review-cards"></div>
+    </section>
+
+    <section class="signup reveal">
+      <h2>Sign up and save</h2>
+      <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+      <form>
+        <input type="email" placeholder="Email" required />
+        <button type="submit">→</button>
+      </form>
+      <div class="quick-links">
+        <h3>Quick Links</h3>
+        <a href="#">Premium Collagen</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Support</a>
+        <a href="#">Manage Subscription</a>
+      </div>
+    </section>
+
+    <script>
+      fetch('reviews.json')
+        .then((res) => res.json())
+        .then((reviews) => {
+          const container = document.getElementById('review-cards');
+          reviews.forEach((review, index) => {
+            const article = document.createElement('article');
+            article.className = 'review-card reveal';
+            article.style.transitionDelay = `${index * 100}ms`;
+            article.innerHTML = `
+              <h3>${review.name}</h3>
+              <p class="time">${review.time}</p>
+              <p>${review.text}</p>
+              <div class="meta">❤️ ${review.likes} · ${review.comments} comments</div>
+            `;
+            container.appendChild(article);
+          });
+
+          const revealItems = document.querySelectorAll('.reveal');
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+              });
+            },
+            { threshold: 0.16 }
+          );
+
+          revealItems.forEach((item) => observer.observe(item));
+        });
+
+      const hero = document.querySelector('.parallax');
+      window.addEventListener('scroll', () => {
+        const offset = window.scrollY * 0.16;
+        hero.style.backgroundPosition = `center ${offset}px`;
+      });
+    </script>
+  </body>
+</html>
